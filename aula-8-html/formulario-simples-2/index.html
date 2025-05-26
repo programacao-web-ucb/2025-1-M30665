@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulário com JavaScript</title>
+</head>
+<body>
+
+<h2>Formulário com simulação de submissão</h2>
+
+<form id="meuFormulario">
+  <label for="fname">Nome:</label><br>
+  <input type="text" id="fname" name="fname"><br><br>
+
+  <label for="lname">Sobrenome:</label><br>
+  <input type="text" id="lname" name="lname"><br><br>
+
+  <!-- Campo de rádio atualizado -->
+  <p>Turno preferido:</p>
+  <input type="radio" id="manha" name="turno" value="Manhã">
+  <label for="manha">Manhã</label><br>
+  <input type="radio" id="tarde" name="turno" value="Tarde">
+  <label for="tarde">Tarde</label><br>
+  <input type="radio" id="noite" name="turno" value="Noite">
+  <label for="noite">Noite</label><br><br>
+
+  <!-- Campo checkbox -->
+  <input type="checkbox" id="newsletter" name="newsletter" value="Sim">
+  <label for="newsletter">Desejo receber novidades por e-mail</label><br><br>
+
+  <!-- Botão de envio -->
+  <button type="submit">Enviar</button>
+</form>
+
+<h3>Submissões:</h3>
+<ul id="listaSubmissoes"></ul>
+
+<script>
+  document.getElementById("meuFormulario").addEventListener("submit", 
+  function(event) {
+    event.preventDefault(); // Evita envio real do formulário
+
+    // Coletar os dados
+    const nome = document.getElementById("fname").value;
+    const sobrenome = document.getElementById("lname").value;
+
+    const turno = document.querySelector('input[name="turno"]:checked');
+    const turnoValor = turno ? turno.value : "Não selecionado";
+
+    const querNewsletter = document.getElementById("newsletter").checked ? "Sim" : "Não";
+
+    // Criar o item da lista
+    const item = document.createElement("li");
+    item.textContent = `Nome: ${nome} ${sobrenome} | Turno: ${turnoValor} | Receber newsletter: ${querNewsletter}`;
+
+    // Adicionar à lista no HTML
+    document.getElementById("listaSubmissoes").appendChild(item);
+
+    // Limpar o formulário
+    document.getElementById("meuFormulario").reset();
+  });
+</script>
+
+</body>
+</html>
